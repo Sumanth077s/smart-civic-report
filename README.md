@@ -33,3 +33,17 @@ and enables departments to manage and resolve them efficiently.
 cd backend
 npm install
 npm run dev
+
+### Frontend
+```bash
+cd frontend
+npm install
+npm run dev
+
+
+Then push README:
+
+```bash
+git add README.md
+git commit -m "Add project README"
+git push
