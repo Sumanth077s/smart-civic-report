@@ -425,3 +425,29 @@ html {
   width: 100%;
 }
 
+/* ================= CENTERED TOAST ================= */
+
+.toast {
+  position: fixed;
+  top: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 14px 22px;
+  border-radius: 12px;
+  color: white;
+  z-index: 9999;
+  min-width: 280px;
+  text-align: center;
+  animation: toastSlideDown 0.4s ease;
+}
+
+@keyframes toastSlideDown {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -20px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
