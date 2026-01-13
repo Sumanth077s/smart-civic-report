@@ -4,33 +4,98 @@ import Navbar from "../components/Navbar";
 
 export default function Dashboard() {
   const [issues, setIssues] = useState([]);
-  const [title, setTitle] = useState("");
+  const [form, setForm] = useState({
+    title: "",
+    type: "Pothole",
+    location: "",
+    image: null
+  });
 
   useEffect(() => {
     API.get("/issues").then(res => setIssues(res.data));
   }, []);
 
   const submit = async () => {
-    await API.post("/issues", { title });
-    window.location.reload();
+    if (!form.title || !form.location) {
+      alert("Please fill all required fields");
+      return;
+    }
+
+    await API.post("/issues", {
+      title: form.title,
+      type: form.type,
+      location: form.location
+    });
+
+    setForm({ title: "", type: "Pothole", location: "", image: null });
+    const res = await API.get("/issues");
+    setIssues(res.data);
   };
 
   return (
     <>
       <Navbar />
-      <div className="container">
-        <h2>User Dashboard</h2>
-        <input placeholder="Issue title" onChange={e => setTitle(e.target.value)} />
-        <button onClick={submit}>Report Issue</button>
 
-        {issues.map(i => (
-  <div key={i._id} className="issue">
-    <strong>{i.title}</strong>
-    <span style={{ marginLeft: "10px" }}>
-      ({i.status})
-    </span>
-  </div>
-        ))}
+      <div className="dashboard-container">
+        {/* REPORT ISSUE CARD */}
+        <div className="report-card">
+          <h2>Report Civic Issue</h2>
+
+          <div className="form-grid">
+            <input
+              placeholder="Issue title"
+              value={form.title}
+              onChange={e => setForm({ ...form, title: e.target.value })}
+            />
+
+            <select
+              value={form.type}
+              onChange={e => setForm({ ...form, type: e.target.value })}
+            >
+              <option>Pothole</option>
+              <option>Garbage</option>
+              <option>Streetlight</option>
+              <option>Water Leakage</option>
+              <option>Road Damage</option>
+            </select>
+
+            <input
+              placeholder="Location (Area / Street)"
+              value={form.location}
+              onChange={e => setForm({ ...form, location: e.target.value })}
+            />
+
+            <input
+              type="file"
+              accept="image/*"
+              onChange={e => setForm({ ...form, image: e.target.files[0] })}
+            />
+          </div>
+
+          <button className="primary-btn" onClick={submit}>
+            Submit Issue
+          </button>
+        </div>
+
+        {/* ISSUES LIST */}
+        <h3 className="section-title">My Reported Issues</h3>
+
+        <div className="issues-grid">
+          {issues.map(i => (
+            <div key={i._id} className="issue-card">
+              <div className="issue-header">
+                <span className="badge">{i.type || "General"}</span>
+                <span className={`status ${i.status}`}>{i.status}</span>
+              </div>
+
+              <h4>{i.title}</h4>
+              <p className="location">📍 {i.location || "N/A"}</p>
+              <p className="date">
+                🕒 {new Date(i.createdAt || Date.now()).toLocaleString()}
+              </p>
+            </div>
+          ))}
+        </div>
       </div>
     </>
   );

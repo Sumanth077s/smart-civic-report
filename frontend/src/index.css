@@ -4,7 +4,8 @@
   box-sizing: border-box;
 }
 
-html, body {
+html,
+body {
   height: 100%;
 }
 
@@ -17,6 +18,6 @@ body {
     ),
     radial-gradient(circle at bottom right, #00f2fe, transparent 40%),
     linear-gradient(135deg, #0f2027, #203a43, #2c5364);
-  color: #fff;
+  color: #ffffff;
   min-height: 100vh;
 }

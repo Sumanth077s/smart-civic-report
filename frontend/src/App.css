@@ -1,4 +1,4 @@
-/* ================= AUTH LAYOUT ================= */
+/* ================= AUTH PAGES ================= */
 
 .auth-container {
   min-height: 100vh;
@@ -11,11 +11,10 @@
   width: 380px;
   padding: 35px;
   border-radius: 18px;
-  background: rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.15);
   backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
   box-shadow: 0 25px 60px rgba(0, 0, 0, 0.35);
-  animation: fadeUp 0.6s ease;
+  color: white;
 }
 
 .auth-card h2 {
@@ -24,59 +23,40 @@
   margin-bottom: 6px;
 }
 
+/* ✅ MISSING BEFORE */
 .subtitle {
   text-align: center;
   font-size: 14px;
   color: #cfd8dc;
-  margin-bottom: 25px;
+  margin-bottom: 22px;
 }
-
-/* ================= INPUTS ================= */
 
 .auth-card input {
   width: 100%;
-  padding: 13px 14px;
+  padding: 13px;
   margin-bottom: 14px;
   border-radius: 10px;
   border: none;
-  background: rgba(255, 255, 255, 0.18);
-  color: #fff;
-  font-size: 14px;
-  transition: all 0.3s ease;
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
 }
 
 .auth-card input::placeholder {
   color: #e0e0e0;
 }
 
-.auth-card input:focus {
-  outline: none;
-  background: rgba(255, 255, 255, 0.28);
-  box-shadow: 0 0 0 2px rgba(79, 172, 254, 0.6);
-}
-
-/* ================= BUTTON ================= */
-
 .primary-btn {
   width: 100%;
-  padding: 13px;
+  padding: 14px;
   border-radius: 12px;
   border: none;
-  font-size: 15px;
   font-weight: 600;
-  color: #fff;
+  color: white;
   background: linear-gradient(135deg, #4facfe, #00f2fe);
   cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.primary-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 12px 30px rgba(79, 172, 254, 0.6);
-}
-
-/* ================= SWITCH LINKS ================= */
-
+/* ✅ MISSING BEFORE */
 .switch-text {
   margin-top: 18px;
   text-align: center;
@@ -101,9 +81,8 @@
   justify-content: space-between;
   align-items: center;
   padding: 18px 30px;
-  background: rgba(255, 255, 255, 0.12);
-  backdrop-filter: blur(14px);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  background: linear-gradient(90deg, #6fb1fc, #4364f7, #0052d4);
+  color: white;
 }
 
 .navbar h3 {
@@ -111,88 +90,155 @@
 }
 
 .navbar button {
+  background: #ff4b5c;
+  border: none;
   padding: 8px 16px;
+  border-radius: 10px;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* ================= USER & ADMIN DASHBOARD ================= */
+
+.dashboard-container {
+  padding: 30px;
+}
+
+.container {
+  padding: 30px;
+}
+
+/* -------- Report Issue Card -------- */
+
+.report-card {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(12px);
+  padding: 25px;
+  border-radius: 16px;
+  margin-bottom: 30px;
+}
+
+.report-card h2 {
+  margin-bottom: 15px;
+}
+
+/* -------- Form Layout -------- */
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+  margin-bottom: 15px;
+}
+
+.form-grid input,
+.form-grid select {
+  padding: 12px;
   border-radius: 8px;
   border: none;
-  cursor: pointer;
-  font-weight: 600;
-  background: linear-gradient(135deg, #ff416c, #ff4b2b);
+  background: rgba(255, 255, 255, 0.25);
   color: white;
 }
 
-/* ================= DASHBOARD ================= */
-
-.container {
-  padding: 40px;
+.form-grid input::placeholder {
+  color: #e0e0e0;
 }
 
-.container h2 {
-  margin-bottom: 20px;
+.form-grid input[type="file"] {
+  background: transparent;
+  color: white;
+}
+
+/* -------- Submit Button -------- */
+
+.report-card button {
+  width: 100%;
+  padding: 14px;
+  border-radius: 12px;
+  border: none;
+  font-size: 16px;
+  font-weight: 600;
+  background: linear-gradient(90deg, #38ef7d, #11998e);
+  color: white;
+  cursor: pointer;
+}
+
+/* -------- Issues Section -------- */
+
+.section-title {
+  margin-bottom: 15px;
+  font-size: 22px;
+}
+
+/* -------- Issue Cards -------- */
+
+.issues-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+.issue-card,
+.issue {
+  background: rgba(255, 255, 255, 0.18);
+  padding: 18px;
+  border-radius: 14px;
 }
 
 .issue {
-  background: rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(12px);
-  padding: 16px 18px;
-  border-radius: 14px;
-  margin-bottom: 12px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-/* ================= SELECT ================= */
+.issue-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
 
-.issue select {
-  padding: 6px 10px;
-  border-radius: 6px;
-  border: none;
+.badge {
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  background: #03a9f4;
+}
+
+.status.open {
+  color: #ff5252;
+}
+
+.status.in-progress {
+  color: #ffc107;
+}
+
+.status.resolved {
+  color: #4caf50;
+}
+
+.location,
+.date {
+  font-size: 13px;
+  color: #e0e0e0;
 }
 
 /* ================= TOAST ================= */
 
 .toast {
   position: fixed;
-  top: 25px;
-  right: 25px;
+  top: 20px;
+  right: 20px;
   padding: 14px 22px;
   border-radius: 10px;
-  font-size: 14px;
-  font-weight: 500;
   color: white;
   z-index: 999;
-  animation: slideIn 0.4s ease;
 }
 
 .toast.success {
-  background: linear-gradient(135deg, #00c853, #64dd17);
+  background: #4caf50;
 }
 
 .toast.error {
-  background: linear-gradient(135deg, #ff1744, #ff5252);
-}
-
-/* ================= ANIMATIONS ================= */
-
-@keyframes slideIn {
-  from {
-    opacity: 0;
-    transform: translateX(40px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes fadeUp {
-  from {
-    opacity: 0;
-    transform: translateY(40px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  background: #f44336;
 }
