@@ -2,6 +2,8 @@ import API from "../services/api";
 import { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 
+const BASE_URL = "http://localhost:5000";
+
 export default function Dashboard() {
   const [issues, setIssues] = useState([]);
   const [imagePreview, setImagePreview] = useState(null);
@@ -23,18 +25,15 @@ export default function Dashboard() {
       return;
     }
 
-    await API.post("/issues", {
-      title: form.title,
-      type: form.type,
-      location: form.location
-    });
+    const data = new FormData();
+    data.append("title", form.title);
+    data.append("type", form.type);
+    data.append("location", form.location);
+    if (form.image) data.append("image", form.image);
 
-    setForm({
-      title: "",
-      type: "Pothole",
-      location: "",
-      image: null
-    });
+    await API.post("/issues", data);
+
+    setForm({ title: "", type: "Pothole", location: "", image: null });
     setImagePreview(null);
 
     const res = await API.get("/issues");
@@ -46,7 +45,6 @@ export default function Dashboard() {
       <Navbar />
 
       <div className="dashboard-container">
-        {/* REPORT ISSUE CARD */}
         <div className="report-card">
           <h2>Report Civic Issue</h2>
 
@@ -54,16 +52,12 @@ export default function Dashboard() {
             <input
               placeholder="Issue title"
               value={form.title}
-              onChange={e =>
-                setForm({ ...form, title: e.target.value })
-              }
+              onChange={e => setForm({ ...form, title: e.target.value })}
             />
 
             <select
               value={form.type}
-              onChange={e =>
-                setForm({ ...form, type: e.target.value })
-              }
+              onChange={e => setForm({ ...form, type: e.target.value })}
             >
               <option>Pothole</option>
               <option>Garbage</option>
@@ -73,11 +67,9 @@ export default function Dashboard() {
             </select>
 
             <input
-              placeholder="Location (Area / Street)"
+              placeholder="Location"
               value={form.location}
-              onChange={e =>
-                setForm({ ...form, location: e.target.value })
-              }
+              onChange={e => setForm({ ...form, location: e.target.value })}
             />
 
             <input
@@ -86,17 +78,14 @@ export default function Dashboard() {
               onChange={e => {
                 const file = e.target.files[0];
                 setForm({ ...form, image: file });
-                if (file) {
-                  setImagePreview(URL.createObjectURL(file));
-                }
+                setImagePreview(URL.createObjectURL(file));
               }}
             />
           </div>
 
-          {/* IMAGE PREVIEW */}
           {imagePreview && (
             <div className="image-preview">
-              <img src={imagePreview} alt="Preview" />
+              <img src={imagePreview} alt="preview" />
             </div>
           )}
 
@@ -105,16 +94,13 @@ export default function Dashboard() {
           </button>
         </div>
 
-        {/* ISSUES LIST */}
         <h3 className="section-title">My Reported Issues</h3>
 
         <div className="issues-grid">
           {issues.map(i => (
             <div key={i._id} className="issue-card">
               <div className="issue-header">
-                <span className="badge">{i.type || "General"}</span>
-
-                {/* STATUS BADGE WITH ICON */}
+                <span className="badge">{i.type}</span>
                 <span className={`status-badge ${i.status}`}>
                   {i.status === "open" && "🔴 Open"}
                   {i.status === "in-progress" && "🟡 In Progress"}
@@ -122,10 +108,18 @@ export default function Dashboard() {
                 </span>
               </div>
 
+              {i.image && (
+                <img
+                  className="issue-thumb"
+                  src={`${BASE_URL}${i.image}`}
+                  alt="issue"
+                />
+              )}
+
               <h4>{i.title}</h4>
-              <p className="location">📍 {i.location || "N/A"}</p>
+              <p className="location">📍 {i.location}</p>
               <p className="date">
-                🕒 {new Date(i.createdAt || Date.now()).toLocaleString()}
+                🕒 {new Date(i.createdAt).toLocaleString()}
               </p>
             </div>
           ))}

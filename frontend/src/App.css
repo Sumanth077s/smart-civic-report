@@ -309,3 +309,61 @@
 .primary-btn:active {
   transform: scale(0.97);
 }
+/* ================= IMAGE THUMBNAIL ================= */
+
+.issue-thumb {
+  width: 100%;
+  max-width: 200px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin: 10px 0;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+
+/* ================= ADMIN DASHBOARD ================= */
+
+.admin-issue-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.18);
+  padding: 20px;
+  border-radius: 16px;
+  margin-bottom: 16px;
+  gap: 20px;
+}
+
+.admin-issue-info h4 {
+  margin-bottom: 6px;
+}
+
+.admin-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.admin-actions select {
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: none;
+  background: rgba(255, 255, 255, 0.25);
+  color: #fff;
+  cursor: pointer;
+}
+
+.delete-btn {
+  background: linear-gradient(135deg, #ff416c, #ff4b2b);
+  border: none;
+  color: white;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.delete-btn:hover {
+  opacity: 0.9;
+}

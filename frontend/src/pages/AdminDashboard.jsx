@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import Toast from "../components/Toast";
 
+const BASE_URL = "http://localhost:5000";
+
 export default function AdminDashboard() {
   const [issues, setIssues] = useState([]);
   const [toast, setToast] = useState("");
@@ -23,8 +25,7 @@ export default function AdminDashboard() {
   };
 
   const deleteIssue = async (id) => {
-    if (!window.confirm("Are you sure you want to delete this issue?")) return;
-
+    if (!window.confirm("Delete this issue?")) return;
     await API.delete(`/issues/${id}`);
     setToast("Issue deleted successfully");
     fetchIssues();
@@ -41,36 +42,39 @@ export default function AdminDashboard() {
         {issues.length === 0 && <p>No issues reported yet.</p>}
 
         {issues.map((i) => (
-          <div key={i._id} className="issue">
-            <div>
-              <strong>{i.title}</strong>
-              <p>Status: {i.status}</p>
+          <div key={i._id} className="admin-issue-card">
+            {/* LEFT */}
+            <div className="admin-issue-info">
+              <h4>{i.title}</h4>
+              <p>Status: <strong>{i.status}</strong></p>
+
+              {i.image && (
+                <img
+                  src={`${BASE_URL}${i.image}`}
+                  alt="issue"
+                  className="issue-thumb"
+                />
+              )}
             </div>
 
-            <div style={{ display: "flex", gap: "10px" }}>
-              {/* ✅ FIXED STATUS BINDING */}
+            {/* RIGHT – ADMIN CONTROLS */}
+            <div className="admin-actions">
               <select
                 value={i.status}
-                onChange={(e) => updateStatus(i._id, e.target.value)}
+                onChange={(e) =>
+                  updateStatus(i._id, e.target.value)
+                }
               >
                 <option value="open">Open</option>
                 <option value="in-progress">In Progress</option>
                 <option value="resolved">Resolved</option>
               </select>
 
-              {/* 🗑️ DELETE BUTTON */}
               <button
-                style={{
-                  background: "linear-gradient(135deg,#ff416c,#ff4b2b)",
-                  border: "none",
-                  color: "white",
-                  padding: "6px 10px",
-                  borderRadius: "6px",
-                  cursor: "pointer"
-                }}
+                className="delete-btn"
                 onClick={() => deleteIssue(i._id)}
               >
-                Delete
+                🗑 Delete
               </button>
             </div>
           </div>
