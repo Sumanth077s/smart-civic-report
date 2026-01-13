@@ -11,10 +11,13 @@ body {
 
 body {
   font-family: "Inter", "Segoe UI", sans-serif;
+
+  /* 🎨 Modern Civic Dark Blue Theme */
   background:
-    radial-gradient(circle at top left, #434343, transparent 45%),
-    radial-gradient(circle at bottom right, #000000, transparent 45%),
-    linear-gradient(135deg, #0f0f0f, #1c1c1c);
+    radial-gradient(circle at top left, #4f8cff, transparent 45%),
+    radial-gradient(circle at bottom right, #00d4ff, transparent 45%),
+    linear-gradient(135deg, #0a1f44, #102a43, #0f2027);
+
   color: #ffffff;
   min-height: 100vh;
 }
