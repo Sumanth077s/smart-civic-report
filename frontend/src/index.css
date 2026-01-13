@@ -11,13 +11,10 @@ body {
 
 body {
   font-family: "Inter", "Segoe UI", sans-serif;
-  background: radial-gradient(
-      circle at top left,
-      #4facfe,
-      transparent 40%
-    ),
-    radial-gradient(circle at bottom right, #00f2fe, transparent 40%),
-    linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+  background:
+    radial-gradient(circle at top left, #434343, transparent 45%),
+    radial-gradient(circle at bottom right, #000000, transparent 45%),
+    linear-gradient(135deg, #0f0f0f, #1c1c1c);
   color: #ffffff;
   min-height: 100vh;
 }

@@ -4,6 +4,8 @@ import Navbar from "../components/Navbar";
 
 export default function Dashboard() {
   const [issues, setIssues] = useState([]);
+  const [imagePreview, setImagePreview] = useState(null);
+
   const [form, setForm] = useState({
     title: "",
     type: "Pothole",
@@ -27,7 +29,14 @@ export default function Dashboard() {
       location: form.location
     });
 
-    setForm({ title: "", type: "Pothole", location: "", image: null });
+    setForm({
+      title: "",
+      type: "Pothole",
+      location: "",
+      image: null
+    });
+    setImagePreview(null);
+
     const res = await API.get("/issues");
     setIssues(res.data);
   };
@@ -45,12 +54,16 @@ export default function Dashboard() {
             <input
               placeholder="Issue title"
               value={form.title}
-              onChange={e => setForm({ ...form, title: e.target.value })}
+              onChange={e =>
+                setForm({ ...form, title: e.target.value })
+              }
             />
 
             <select
               value={form.type}
-              onChange={e => setForm({ ...form, type: e.target.value })}
+              onChange={e =>
+                setForm({ ...form, type: e.target.value })
+              }
             >
               <option>Pothole</option>
               <option>Garbage</option>
@@ -62,15 +75,30 @@ export default function Dashboard() {
             <input
               placeholder="Location (Area / Street)"
               value={form.location}
-              onChange={e => setForm({ ...form, location: e.target.value })}
+              onChange={e =>
+                setForm({ ...form, location: e.target.value })
+              }
             />
 
             <input
               type="file"
               accept="image/*"
-              onChange={e => setForm({ ...form, image: e.target.files[0] })}
+              onChange={e => {
+                const file = e.target.files[0];
+                setForm({ ...form, image: file });
+                if (file) {
+                  setImagePreview(URL.createObjectURL(file));
+                }
+              }}
             />
           </div>
+
+          {/* IMAGE PREVIEW */}
+          {imagePreview && (
+            <div className="image-preview">
+              <img src={imagePreview} alt="Preview" />
+            </div>
+          )}
 
           <button className="primary-btn" onClick={submit}>
             Submit Issue
@@ -85,7 +113,13 @@ export default function Dashboard() {
             <div key={i._id} className="issue-card">
               <div className="issue-header">
                 <span className="badge">{i.type || "General"}</span>
-                <span className={`status ${i.status}`}>{i.status}</span>
+
+                {/* STATUS BADGE WITH ICON */}
+                <span className={`status-badge ${i.status}`}>
+                  {i.status === "open" && "🔴 Open"}
+                  {i.status === "in-progress" && "🟡 In Progress"}
+                  {i.status === "resolved" && "🟢 Resolved"}
+                </span>
               </div>
 
               <h4>{i.title}</h4>
