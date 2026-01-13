@@ -1,3 +1,9 @@
+/* ================= GLOBAL UX ================= */
+
+html {
+  scroll-behavior: smooth;
+}
+
 /* ================= AUTH PAGES ================= */
 
 .auth-container {
@@ -164,6 +170,20 @@
   cursor: pointer;
 }
 
+.primary-btn:hover,
+.report-card button:hover,
+.delete-btn:hover {
+  filter: brightness(1.08);
+}
+
+.primary-btn:focus,
+.report-card button:focus,
+.admin-actions select:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(79, 172, 254, 0.6);
+}
+
+
 /* -------- Issues Section -------- */
 
 .section-title {
@@ -175,9 +195,10 @@
 
 .issues-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 24px;
 }
+
 
 .issue-card,
 .issue {
@@ -221,6 +242,28 @@
 .date {
   font-size: 13px;
   color: #e0e0e0;
+}
+/* ================= CARD ENHANCEMENTS ================= */
+
+.issue-card,
+.issue,
+.admin-issue-card {
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.issue-card:hover,
+.admin-issue-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
+}
+
+.issue-thumb {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.issue-thumb:hover {
+  transform: scale(1.03);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
 }
 
 /* ================= TOAST ================= */
@@ -367,3 +410,18 @@
 .delete-btn:hover {
   opacity: 0.9;
 }
+
+.admin-issue-info {
+  max-width: 70%;
+}
+
+.admin-actions {
+  min-width: 160px;
+  align-items: stretch;
+}
+
+.admin-actions select,
+.delete-btn {
+  width: 100%;
+}
+
